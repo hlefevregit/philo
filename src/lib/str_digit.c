@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_philo.c                                  :+:      :+:    :+:   */
+/*   str_digit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 17:25:30 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 15:04:51 by hulefevr         ###   ########.fr       */
+/*   Created: 2024/05/27 17:02:12 by hulefevr          #+#    #+#             */
+/*   Updated: 2024/05/28 15:18:06 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
-void	init_philo(t_tid *philo, void *id)
+int	str_digit(char *str)
 {
-	philo->eat = 0;
-	philo->id = (int *)id;
-	philo->philo = get_philos(0);
+	int	i;
+	
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-void	*ft_create_philo(void *id)
+int	ft_isdigit(int c)
 {
-	t_tid	philo;
-	
-	init_philo(&philo, id);
-	while (1)
-	{
-		if (ft_life(&philo) == 0)
-			return (0);
-	}
+	if ('0' <= c && c <= '9')
+		return (1);
+	return (0);
 }

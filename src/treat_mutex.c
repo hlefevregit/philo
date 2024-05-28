@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_philo.c                                  :+:      :+:    :+:   */
+/*   treat_mutex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 17:25:30 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 15:04:51 by hulefevr         ###   ########.fr       */
+/*   Created: 2024/05/28 15:11:49 by hulefevr          #+#    #+#             */
+/*   Updated: 2024/05/28 15:16:24 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_philo(t_tid *philo, void *id)
+void	ft_unlock_mutex(t_tid *philo)
 {
-	philo->eat = 0;
-	philo->id = (int *)id;
-	philo->philo = get_philos(0);
-}
-
-void	*ft_create_philo(void *id)
-{
-	t_tid	philo;
-	
-	init_philo(&philo, id);
-	while (1)
+	pthread_mutex_unlock(&philo->philo->mutex[*philo->id].mutex);
+	philo->philo->mutex[*philo->id].state = 1;
+	if (*philo->id + 1 < philo->philo->num_philo)
 	{
-		if (ft_life(&philo) == 0)
-			return (0);
+		pthread_mutex_unlock(&philo->philo->mutex[*philo->id + 1].mutex);
+		philo->philo->mutex[*philo->id + 1].state = 1;
+	}
+	else
+	{
+		pthread_mutex_unlock(&philo->philo->mutex[0].mutex);
+		philo->philo->mutex[0].state = 1;
 	}
 }

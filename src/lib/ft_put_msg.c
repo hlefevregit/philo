@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strerror.c                                      :+:      :+:    :+:   */
+/*   ft_put_msg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 16:45:39 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/27 16:47:13 by hulefevr         ###   ########.fr       */
+/*   Created: 2024/05/28 16:07:57 by hulefevr          #+#    #+#             */
+/*   Updated: 2024/05/28 16:18:02 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
-void	ft_putchar(char c)
+void	ft_put_msg(char *str, t_tid *philo)
 {
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		ft_putchar(str[i++]);
-}
-
-int	ft_strerror(char *str)
-{
-	ft_putstr(str);
-	return (0);
+	philo->time_stamp = (get_time() - philo->philo->start_time);
+	ft_putnbr_long(philo->time_stamp);
+	ft_putchar(' ');
+	ft_putnbr(philo->id);
+	ft_putchar(' ');
+	ft_putstr(str);	
 }

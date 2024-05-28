@@ -6,9 +6,19 @@
 #    By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 13:21:22 by hulefevr          #+#    #+#              #
-#    Updated: 2024/05/27 13:23:14 by hulefevr         ###   ########.fr        #
+#    Updated: 2024/05/28 15:30:11 by hulefevr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+SRCS =	./src/lib/ft_putnbr_long.c \
+		./src/lib/str_digit.c \
+		./src/ft_strerror.c \
+		./src/ft_create_philo.c \
+		./src/ft_dead.c \
+		./src/ft_life.c \
+		./src/ft_time.c \
+		./src/philo.c \
+		./src/treat_mutex.c \
 
 NAME = philo
 

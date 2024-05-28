@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_create_philo.c                                  :+:      :+:    :+:   */
+/*   ft_dead.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 17:25:30 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 15:04:51 by hulefevr         ###   ########.fr       */
+/*   Created: 2024/05/28 15:09:56 by hulefevr          #+#    #+#             */
+/*   Updated: 2024/05/28 16:18:27 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_philo(t_tid *philo, void *id)
+int	ft_dead(t_tid *philo)
 {
-	philo->eat = 0;
-	philo->id = (int *)id;
-	philo->philo = get_philos(0);
-}
-
-void	*ft_create_philo(void *id)
-{
-	t_tid	philo;
-	
-	init_philo(&philo, id);
-	while (1)
+	if (philo->philo->dead == 1)
 	{
-		if (ft_life(&philo) == 0)
-			return (0);
+		ft_unlock_mutex(philo);
+		return (1);
 	}
+	philo->check_eat = (get_time() - philo->philo->start_time);
+	if (philo->check_eat - philo->last_eat >= philo->philo->time_to_die)
+	{
+		ft_put_msg("is dead\n", philo);
+		philo->philo->dead = 1;
+	}
+	if (philo->philo->max_eat == philo->philo->num_philo)
+	{
+		ft_unlock_mutex(philo);
+		return (1);
+	}
+	return (0);
 }
