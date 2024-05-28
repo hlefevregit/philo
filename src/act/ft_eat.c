@@ -6,11 +6,11 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:32:49 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 16:27:09 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:36:54 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	ft_eat(t_tid *philo)
 {

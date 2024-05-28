@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:35:09 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/27 17:47:47 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/28 16:54:08 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,12 @@ t_philo *get_philos(t_philo *philo)
 	static t_philo	*static_philo;
 
 	if (philo != 0)
+	{
 		static_philo = philo;
+		static_philo->dead = 0;
+		static_philo->max_eat = 0;
+	}
 	return (static_philo);
-}
-
-long int	ft_get_milli(__useconds_t micro)
-{
-	long int	milli;
-	
-	milli = micro / 1000;
-	return (milli);
 }
 
 long int	get_time(void)
@@ -39,6 +35,6 @@ long int	get_time(void)
 	gettimeofday(&time, NULL);
 	second = (time.tv_sec * 1000000);
 	micro = (second + time.tv_usec);
-	milli = ft_get_milli(micro);
+	milli = micro / 1000;
 	return (milli);
 }
