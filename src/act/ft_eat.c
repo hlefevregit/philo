@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:32:49 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 16:36:54 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:37:33 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_eat(t_tid *philo)
 	}
 	ft_put_msg("is eating\n", philo);
 	philo->eat++;
-	if (philo->eat++ == philo->philo->max_eat)
-		philo->philo->max_eat++;
-	if (philo->philo->max_eat == philo->philo->num_philo || ft_dead(philo) == 1)
+	if (philo->eat == philo->philo->max_eat)
+		philo->philo->eaten++;
+	if (philo->philo->eaten == philo->philo->num_philo || ft_dead(philo) == 1)
 		return (1);
 	philo->last_eat = get_time() - philo->philo->start_time;
 	while (eat_time > 0)
@@ -41,7 +41,7 @@ int	ft_eat(t_tid *philo)
 		}
 	}
 	ft_unlock_mutex(philo);
-	philo->time_stamp = get_time - philo->philo->start_time;
+	philo->time_stamp = get_time() - philo->philo->start_time;
 	if (ft_dead(philo) == 1)
 	{
 		ft_unlock_mutex(philo);

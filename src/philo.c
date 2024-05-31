@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:42:32 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/27 17:41:05 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:34:40 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,26 @@ void	ft_philo(t_philo *philo)
 	{
 		pthread_mutex_init(&philo->mutex[i].mutex, NULL);
 		philo->mutex[i].state = 1;
-		pthread_mutex_destroy(&philo->mutex[i].mutex);
+		pthread_mutex_unlock(&philo->mutex[i].mutex);
 		id[i] = i;
+		i++;
 	}
 	get_philos(philo);
-	i = 0;
-	while (i++ < philo->num_philo)
+	i = -1;
+	while (++i < philo->num_philo)
 	{
 		usleep(1000);
 		pthread_create(&thr[i], NULL, ft_create_philo, &id[i]);
 	}
+	i = -1;
+	while (++i < philo->num_philo)
+		pthread_join(thr[i], NULL);
+	i = -1;
+	while (++i < philo->num_philo)
+		pthread_mutex_destroy(&philo->mutex[i].mutex);
+	free(philo->mutex);
+	free(id);
+	free(thr);
 }
 
 int	check_args(int ac, char **av)
@@ -55,7 +65,6 @@ int	check_args(int ac, char **av)
 void	init_env(int ac, char **av)
 {
 	t_philo	philo;
-	int		err;
 	
 	if (check_args(ac, av) == 1)
 	{
@@ -67,11 +76,11 @@ void	init_env(int ac, char **av)
 		if (ac != 6)
 			philo.max_eat = -1;
 		else
-			philo.max_eat = 1;
+			philo.max_eat = ft_atoi(av[5]);
 	}
 	else
 	{
-		err = ft_strerror("Not only digit\n");
+		ft_strerror("Error : Not only digit\n");
 		return ;
 	}
 	ft_philo(&philo);

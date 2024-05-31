@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:35:09 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 16:54:08 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:40:01 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_philo *get_philos(t_philo *philo)
 	{
 		static_philo = philo;
 		static_philo->dead = 0;
-		static_philo->max_eat = 0;
+		static_philo->eaten = 0;
 	}
 	return (static_philo);
 }

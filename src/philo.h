@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:43:02 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 16:51:29 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:36:10 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include <sys/time.h>
 # include <time.h>
 
@@ -34,6 +35,7 @@ typedef struct s_philo
 	long	start_time;
 	int		number_of_times_each_philosopher_must_eat;
 	int		max_eat;
+	int		eaten;
 	int		dead;
 	t_mutex	*mutex;
 }			t_philo;
@@ -53,20 +55,27 @@ typedef struct s_tid
 
 void		ft_putchar(char c);
 void		ft_putstr(char *str);
-int			ft_strerror(char *str);
-int			str_digit(char *str);
 void		ft_putnbr_long(long int nb);
 void		ft_putnbr(int nb);
 void		ft_put_msg(char *str, t_tid *philo);
+
+int			ft_strerror(char *str);
+int			str_digit(char *str);
+int			ft_isdigit(int c);
+int			ft_atoi(const char *str);
 
 /*************PHILO***********/
 
 t_philo 	*get_philos(t_philo *philo);
 void		*ft_create_philo(void *id);
+
 int			ft_life(t_tid *philo);
 int			ft_eat(t_tid *philo);
 int			ft_dead(t_tid *philo);
 int			ft_fork(t_tid *philo);
+int			ft_sleep(t_tid *philo);
+int			ft_think(t_tid *philo);
+
 long int	get_time(void);
 
 /*************LOCK AND UNLOCK********/

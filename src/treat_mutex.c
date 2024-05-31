@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:11:49 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 16:48:51 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:32:42 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_lock_mutex(int id, t_tid *philo)
 		pthread_mutex_lock(&philo->philo->mutex[0].mutex);
 		philo->philo->mutex[0].state = 0;
 	}
-	else if (id = 1)
+	else if (id == 1)
 	{
 		pthread_mutex_lock(&philo->philo->mutex[*philo->id].mutex);
 		philo->philo->mutex[*philo->id].state = 0;
 	}
-	else if (id = 2)
+	else if (id == 2)
 	{
 		pthread_mutex_lock(&philo->philo->mutex[*philo->id + 1].mutex);
 		philo->philo->mutex[*philo->id + 1].state = 0;

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_msg.c                                       :+:      :+:    :+:   */
+/*   ft_think.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/28 16:07:57 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/31 15:53:10 by hulefevr         ###   ########.fr       */
+/*   Created: 2024/05/31 13:50:37 by hulefevr          #+#    #+#             */
+/*   Updated: 2024/05/31 14:21:56 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	ft_put_msg(char *str, t_tid *philo)
+int	ft_think(t_tid *philo)
 {
-	printf("%ld %i %s", (get_time() - philo->philo->start_time)
-		, *philo->id, str);
+	if (ft_dead(philo) == 1)
+		return (1);
+	ft_put_msg("is thinking\n", philo);
+	return (0);
 }

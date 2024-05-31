@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:25:30 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/28 15:04:51 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:32:17 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_philo(t_tid *philo, void *id)
 	philo->eat = 0;
 	philo->id = (int *)id;
 	philo->philo = get_philos(0);
+	philo->last_eat = (get_time() - philo->philo->start_time);
 }
 
 void	*ft_create_philo(void *id)
