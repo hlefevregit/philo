@@ -6,29 +6,20 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 13:48:25 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/31 16:26:59 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:56:16 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	ft_sleep(t_tid *philo)
+void	ft_sleep(t_philo *philo)
 {
-	int	sleep_time;
-	
-	if (ft_dead(philo) == 1)
-		return (1);
-	sleep_time = philo->philo->time_to_sleep;
-	ft_put_msg("is sleeping\n", philo);
-	while (sleep_time > 0)
+	ft_put_msg("is sleeping", philo);
+	pthread_mutex_unlock(&philo->fork);
+	pthread_mutex_unlock(philo->next_fork);
+	if (philo->gen->alive == 1)
 	{
-		usleep(sleep_time / 1000);
-		sleep_time--;
-		if (ft_dead(philo) == 1)
-			return (1);
+		ft_usleep(philo->gen->time_to_sleep, philo);
+		ft_put_msg("is thinking", philo);
 	}
-	philo->time_stamp = get_time() - philo->philo->start_time;
-	if (ft_dead(philo) == 1)
-		return (1);
-	return (0);
 }

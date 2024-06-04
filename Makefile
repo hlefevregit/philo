@@ -6,7 +6,7 @@
 #    By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/27 13:21:22 by hulefevr          #+#    #+#              #
-#    Updated: 2024/05/31 15:24:17 by hulefevr         ###   ########.fr        #
+#    Updated: 2024/06/04 17:27:11 by hulefevr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,10 @@ SRCS =	./src/lib/ft_putnbr_long.c \
 		./src/lib/ft_put_msg.c \
 		./src/lib/ft_atoi.c \
 		./src/ft_create_philo.c \
-		./src/act/ft_dead.c \
-		./src/act/ft_life.c \
-		./src/act/ft_fork.c \
 		./src/act/ft_eat.c \
 		./src/act/ft_sleep.c \
-		./src/act/ft_think.c \
 		./src/ft_time.c \
 		./src/philo.c \
-		./src/treat_mutex.c \
 
 NAME = philo
 

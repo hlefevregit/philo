@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:43:02 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/31 17:36:10 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/06/04 16:11:49 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,32 @@
 # include <sys/time.h>
 # include <time.h>
 
-typedef struct s_mutex
-{
-	pthread_mutex_t	mutex;
-	int				state;
-}			t_mutex;
+typedef struct s_gen	t_gen;
 
 typedef struct s_philo
 {
-	int		num_philo;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	start_time;
-	int		number_of_times_each_philosopher_must_eat;
-	int		max_eat;
-	int		eaten;
-	int		dead;
-	t_mutex	*mutex;
-}			t_philo;
+	pthread_t		philo;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	*next_fork;
+	long int		last_meal;
+	t_gen			*gen;
+	int				id;
+	int				ate;
+}				t_philo;
 
-typedef struct s_tid
+typedef struct s_gen
 {
-	long int	time_stamp;
-	long int	last_eat;
-	long int	check_eat;
-	int			eat;
-	t_philo		*philo;
-	int			*id;
-}			t_tid;
+	int				alive;
+	int				nbr_philo;
+	long int		time_to_die;
+	long int		time_to_eat;
+	long int		time_to_sleep;
+	int				nbr_meal;
+	long int		start_meal;
+	t_philo			*philos;
+	int				all_ate;
+	pthread_mutex_t	print;
+}				t_gen;
 
 
 /**********LIB************/
@@ -57,7 +54,7 @@ void		ft_putchar(char c);
 void		ft_putstr(char *str);
 void		ft_putnbr_long(long int nb);
 void		ft_putnbr(int nb);
-void		ft_put_msg(char *str, t_tid *philo);
+void		ft_put_msg(char *str, t_philo *philo);
 
 int			ft_strerror(char *str);
 int			str_digit(char *str);
@@ -66,21 +63,19 @@ int			ft_atoi(const char *str);
 
 /*************PHILO***********/
 
-t_philo 	*get_philos(t_philo *philo);
 void		*ft_create_philo(void *id);
-
-int			ft_life(t_tid *philo);
-int			ft_eat(t_tid *philo);
-int			ft_dead(t_tid *philo);
-int			ft_fork(t_tid *philo);
-int			ft_sleep(t_tid *philo);
-int			ft_think(t_tid *philo);
+void		ft_usleep(long int time, t_philo *philo);
+void		ft_check_death(t_gen *gen);
+void		ft_clean_meal(t_gen *gen);
+void		ft_eat(t_philo *philo);
+void		ft_sleep(t_philo *philo);
 
 long int	get_time(void);
 
+
 /*************LOCK AND UNLOCK********/
 
-void		ft_unlock_mutex(t_tid *philo);
-void		ft_lock_mutex(int id, t_tid *philo);
+void		ft_unlock_mutex(t_philo *philo);
+void		ft_lock_mutex(int id, t_philo *philo);
 
 #endif

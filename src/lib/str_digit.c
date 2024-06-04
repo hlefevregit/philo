@@ -6,7 +6,7 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:02:12 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/31 14:27:16 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:07:37 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	str_digit(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{

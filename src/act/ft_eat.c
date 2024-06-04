@@ -6,46 +6,22 @@
 /*   By: hulefevr <hulefevr@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 15:32:49 by hulefevr          #+#    #+#             */
-/*   Updated: 2024/05/31 17:37:33 by hulefevr         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:57:08 by hulefevr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	ft_eat(t_tid *philo)
+void	ft_eat(t_philo *philo)
 {
-	int	eat_time;
-
-	eat_time = philo->philo->time_to_eat;
-	philo->time_stamp = (get_time() - philo->philo->start_time);
-	if (ft_dead(philo) == 1)
+	if (philo->gen->alive == 1)
 	{
-		ft_unlock_mutex(philo);
-		return (1);
+		pthread_mutex_lock(&philo->fork);
+		pthread_mutex_lock(philo->next_fork);
+		ft_put_msg("has taken a fork", philo);
+		philo->last_meal = get_time();
+		ft_put_msg("is eating", philo);
+		philo->ate++;
+		ft_usleep(philo->gen->time_to_eat, philo);
 	}
-	ft_put_msg("is eating\n", philo);
-	philo->eat++;
-	if (philo->eat == philo->philo->max_eat)
-		philo->philo->eaten++;
-	if (philo->philo->eaten == philo->philo->num_philo || ft_dead(philo) == 1)
-		return (1);
-	philo->last_eat = get_time() - philo->philo->start_time;
-	while (eat_time > 0)
-	{
-		usleep(1000);
-		eat_time--;
-		if (ft_dead(philo) == 1)
-		{
-			ft_unlock_mutex(philo);
-			return (1);
-		}
-	}
-	ft_unlock_mutex(philo);
-	philo->time_stamp = get_time() - philo->philo->start_time;
-	if (ft_dead(philo) == 1)
-	{
-		ft_unlock_mutex(philo);
-		return (1);
-	}
-	return (0);
 }
